@@ -42,7 +42,7 @@ h3 {
     width: 100%;
 }
 
-ul {
+nav ul {
     list-style: none;
     top: 20px;
 }
@@ -50,16 +50,15 @@ ul {
 nav {
     position: absolute;
     top: 60px;
-    right: 40px;
-    right: 600px;
+    left: 400px;
 }
 
-li {
+nav li {
     font-size: 19px;
     display: inline;
 }
 
-li a {
+nav li a {
     text-decoration: none;
     color: rgb(34, 14, 143);
     background-color: rgb(255, 255, 255);
@@ -84,4 +83,85 @@ main {
 
 p {
     font-size: 18px;
+}
+
+#lista {
+    background-color: rgb(171, 219, 175);
+    text-align: left;
+}
+
+.lista {
+    list-style-type: square;
+}
+
+ul {
+    list-style-type: circle;
+}
+
+ol ul {
+    list-style-type: lower-latin;
+}
+
+#lista h3 {
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+.li-separado {
+    margin-top: 25px;
+}
+
+table {
+    height: 400px;
+    width: 800px;
+    background-color: rgb(171, 219, 175);
+    text-align: center;
+    margin-left: 40px;
+    font: arial;
+}
+
+tr {
+    padding-left: 5px;
+}
+
+.tabla {
+    width: 900px;
+    margin-right: 400px;
+    margin-left: 275px;
+    background-color: rgb(171, 219, 175);
+    text-align: left;
+    padding-top: 5px;
+}
+
+section div {
+    display: inline-flex;
+}
+
+div p {
+    padding-right: 226px;
+}
+
+#formulario {
+    background-color: rgb(171, 219, 175);
+    top: 750px;
+    width: 900px;
+    height: 800px;
+    margin-top: -20px;
+    padding-top: 30px;
+    padding-left: 20px;
+    padding-right: 15px;
+    padding-bottom: 30px;
+    left: 240px;
+}
+
+#portada2 {
+    width: 900px;
+    height: 500px;
+    margin-top: 40px;
+    margin-left: 250px;
+}
+
+iframe {
+    width: 400px;
+    height: 300px;
 }
