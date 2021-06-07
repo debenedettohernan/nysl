@@ -1,0 +1,87 @@
+body {
+    background-image: url("../image/fondo.jpg")
+}
+
+#logo {
+    position: absolute;
+    top: 0px;
+    width: 200px;
+    height: 200px;
+    right: 40px;
+}
+
+#portada {
+    padding-top: 40px;
+    width: 1325px;
+    height: 550px;
+    margin-left: 40px;
+}
+
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+    background-color: rgb(150, 253, 103);
+    width: 1200px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 40px;
+    background-color: rgb(150, 253, 103);
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+.box {
+    width: 100%;
+}
+
+ul {
+    list-style: none;
+    top: 20px;
+}
+
+nav {
+    position: absolute;
+    top: 60px;
+    right: 40px;
+    right: 600px;
+}
+
+li {
+    font-size: 19px;
+    display: inline;
+}
+
+li a {
+    text-decoration: none;
+    color: rgb(34, 14, 143);
+    background-color: rgb(255, 255, 255);
+    border: rgb(0, 0, 0) solid 2px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+main {
+    background-color: rgb(171, 219, 175);
+    text-align: center;
+    padding-bottom: 10px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.selection {
+    background-color: rgb(63, 148, 84);
+}
+
+p {
+    font-size: 18px;
+}
