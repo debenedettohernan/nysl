@@ -1,0 +1,44 @@
+#img {
+    width: 45px;
+    height: 34px;
+}
+
+.colorNav {
+    background-color: rgba(32, 202, 83, 0.966);
+}
+
+div h1 {
+    text-align: center;
+    margin-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+li a {
+    text-align: left;
+}
+
+body {
+    background-image: url(../img/fondo.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
+.pie {
+    width: 100%;
+}
+
+footer nav div span {
+    text-align: center;
+    font-size: 18px;
+}
+
+.contenidoInfo {
+    background-color: rgb(250, 234, 234);
+}
+
+.contenidoAcordion {
+    background-color: rgb(44, 248, 105);
+    border-right-color: rgb(28, 92, 47);
+}
