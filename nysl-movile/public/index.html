@@ -17,28 +17,71 @@
 </head>
 
 <body>
-    <div class="container mb-5">
+    <div class="container mb-5" id="app">
         <header class="row">
             <div class="col-12">
-                <nav class="navbar navbar-expand-lg navbar-light colorNav row">
+                <nav class="navbar navbar-expand-lg navbar-light color-Nav row">
                     <div class="container-fluid col-12">
-                        <img id="img" src="img/nysl_logo.png" alt="Logo NYSL" class="d-inline-block align-top ">NYSL League
+                        <img id="img" src="img/nysl_logo.png" alt="Logo NYSL" class="d-inline-block align-top" onclick="mostrarConClick('home')"> NYSL League
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
-                        <div class="collapse navbar-collapse " id="navbarNav">
+                        <div class="row">
+                            <ul class="navbar-nav mx-auto col-12">
+                                <li class="nav-item">
+                                    <!-- Button trigger modal -->
+                                    <button v-if="usuarioActual == null" type="button" class="btn btn-primary foro" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                     Login
+                                    </button>
+                                    <button v-else="usuarioActual != null" v-on:click="cerrarSesion()" type="button" class="btn btn-primary foro">
+                                        Log out
+                                       </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Sign in</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="mb-3">
+                                                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                                            <input type="email" v-model="usuario" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                                            <div id="emailHelp" class="form-text"></div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                                                            <input type="password" v-model="pw" class="form-control" id="exampleInputPassword1">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button v-on:click="crearUsuario" type="button" class="btn btn-success">Sign up</button>
+                                                    <button v-on:click="registroGoogle" type="button" class="btn btn-success">Join with Google</button>
+                                                    <button v-on:click="iniciarSesion" type="button" class="btn btn-success">Sign in</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav mx-auto ">
-                                <li class="nav-item ">
-                                    <a class="nav-link " href="index.html">Home</a>
+                                <li class="nav-item">
+                                    <a href="#home" aria-current="pagina" onclick="app.mostrarConClick('home')" class="nav-link">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="matches.html">Matches</a>
+                                    <a href="#matches" aria-current="pagina" onclick="app.mostrarConClick('matches')" class="nav-link">Matches</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="contact-with-parents.html">Contact Parents</a>
+                                    <a href="#notices" aria-current="pagina" onclick="app.mostrarConClick('notices')" class="nav-link">Contact Parents</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="contact-with-NYSL.html">Contact NYSL</a>
+                                    <a href="#contact" aria-current="pagina" onclick="app.mostrarConClick('contact')" class="nav-link">Contact NYSL</a>
                                 </li>
                             </ul>
                         </div>
@@ -46,55 +89,429 @@
                 </nav>
             </div>
         </header>
-        <main class="row">
-            <h1 class="col-12">Upcoming Events</h1>
-            <div class="col-12">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="row border border-success">
-                            <p class="col-7">August 4</p>
-                            <p class="col-5">NYSL Fundraiser </p>
-                        </div>
-                        <div class="row border border-success">
-                            <p class="col-7">August 16</p>
-                            <p class="col-5"> Season Kick-off: Meet the Teams </p>
-                        </div>
-                        <div class="row border border-success">
-                            <p class="col-7">September 1</p>
-                            <p class="col-5"> First Game of the Season (Check Game Schedule for details)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 col-md-6">
-                        <button class="btn contenidoAcordion mx" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Current Match</button>
-                    </div>
-                    <div class="col-6 col-md-6">
-                        <button class="btn contenidoAcordion" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Next Matches</button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 col-md-6">
-                        <div class="collapse multi-collapse " id="multiCollapseExample1">
-                            <div class="card card-body contenidoInfo">
-                                <p class="col-12">At this moment no games are being played </p>
+        <main>
+            <div class="row" id="home">
+                <h1 class="col-12">Upcoming Events</h1>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row border border-success">
+                                <p class="col-7">August 4</p>
+                                <p class="col-5">NYSL Fundraiser </p>
+                            </div>
+                            <div class="row border border-success">
+                                <p class="col-7">August 16</p>
+                                <p class="col-5"> Season Kick-off: Meet the Teams </p>
+                            </div>
+                            <div class="row border border-success">
+                                <p class="col-7">September 1</p>
+                                <p class="col-5"> First Game of the Season (Check Game Schedule for details)</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6">
-                        <div class="collapse multi-collapse" id="multiCollapseExample2">
-                            <div class="card card-body contenidoInfo">
-                                9/15 U2 and U4 Location North Times 9:30 a.m.
+                    <div class="row">
+                        <div class="col-6 col-md-6">
+                            <button class="btn contenido-Acordion mx" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Current Match</button>
+                        </div>
+                        <div class="col-6 col-md-6">
+                            <button class="btn contenido-Acordion" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Next Matches</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <div class="collapse multi-collapse" id="multiCollapseExample1">
+                                <div class="card card-body contenido-Info">
+                                    <p class="col-12">At this moment no games are being played </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="collapse multi-collapse" id="multiCollapseExample2">
+                                <div class="card card-body contenido-Info">
+                                    9/15 U2 and U4 Location North Times 9:30 a.m.
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="row" id="matches">
+                <h1 class="col-12">Select desired NYSL league category</h1>
+                <div class="accordion accordion-flush col-12" id="accordionFlushExample">
+                    <div class="accordion-item ">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                      U1
+                    </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body contenido-Acordion">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Day</th>
+                                            <th scope="col">Location</th>
+                                            <th scope="col">Times</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>9/01</td>
+                                            <td>
+                                                <a href="https://www.google.com/maps/place/AJ+Katzenmaier+Elementary/@41.900229,-87.629069,16z/data=!4m5!3m4!1s0x0:0x15e198c063fc787c!8m2!3d41.9002288!4d-87.6290694?hl=es">AJ Katzenmaier</a></td>
+                                            <td>9:30 a.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9/08</td>
+                                            <td><a href="https://www.google.com/maps?ll=41.929623,-87.645973&z=16&t=m&hl=es&gl=AR&mapclient=embed&cid=15852491871625214517
+                                                ">Marjorie P Hart</a></td>
+                                            <td>1:00 p.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9/22</td>
+                                            <td><a href="https://www.google.com/maps/place/SOUTH+ELEMENTARY+SCHOOL/@42.020217,-87.886045,7z/data=!4m5!3m4!1s0x0:0x93bdf85af2a839ed!8m2!3d42.0202171!4d-87.8860448?hl=es">South</a></td>
+                                            <td>9:30 a.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10/06</td>
+                                            <td><a href="https://www.google.com/maps/place/SOUTH+ELEMENTARY+SCHOOL/@42.020217,-87.886045,7z/data=!4m5!3m4!1s0x0:0x93bdf85af2a839ed!8m2!3d42.0202171!4d-87.8860448?hl=es">South</a></td>
+                                            <td>1:00 p.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10/08</td>
+                                            <td><a href="https://www.google.com/maps/place/Green+Bay,+Wisconsin,+EE.+UU./@44.522945,-87.990495,11z/data=!4m5!3m4!1s0x8802e2e809b380f3:0x6370045214dcf571!8m2!3d44.5133188!4d-88.0132958?hl=es">Greenbay</a></td>
+                                            <td>1:00 p.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10/27</td>
+                                            <td><a href="https://www.google.com/maps/place/AJ+Katzenmaier+Elementary/@41.900229,-87.629069,16z/data=!4m5!3m4!1s0x0:0x15e198c063fc787c!8m2!3d41.9002288!4d-87.6290694?hl=es">AJ Katzenmaier</a></td>
+                                            <td>9:30 a.m.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button class="fondo-Boton" v-if="usuarioActual != null" onclick='app.mostrarConClick("foro",1)'>Chat-foro-U1</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                      U2
+                    </button>
+                        </h2>
+                        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body contenido-Acordion">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Day</th>
+                                            <th scope="col">Location</th>
+                                            <th scope="col">Times</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>9/01</td>
+                                            <td><a href="https://www.google.com/maps/place/Green+Bay,+Wisconsin,+EE.+UU./@44.522945,-87.990495,11z/data=!4m5!3m4!1s0x8802e2e809b380f3:0x6370045214dcf571!8m2!3d44.5133188!4d-88.0132958?hl=es">Greenbay</a></td>
+                                            <td>1:00 p.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9/15</td>
+                                            <td><a href="https://www.google.com/maps/place/North+Elementary/@41.907145,-87.646123,16z/data=!4m5!3m4!1s0x0:0x5736e62f19086c62!8m2!3d41.9071449!4d-87.6461229?hl=es">North</a></td>
+                                            <td>9:30 a.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9/22</td>
+                                            <td><a href="https://www.google.com/maps/place/Howard+A+Yeager+Elementary/@41.923261,-87.662921,16z/data=!4m5!3m4!1s0x0:0xb6cb22b2f0358874!8m2!3d41.923261!4d-87.6629215?hl=es">Howard A Yeager</a></td>
+                                            <td>1:00 p.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10/06</td>
+                                            <td><a href="https://www.google.com/maps?ll=41.929623,-87.645973&z=16&t=m&hl=es&gl=AR&mapclient=embed&cid=15852491871625214517
+                                                ">Marjorie P Hart</a></td>
+                                            <td>9:30 a.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10/20</td>
+                                            <td><a href="https://www.google.com/maps?ll=41.929623,-87.645973&z=16&t=m&hl=es&gl=AR&mapclient=embed&cid=15852491871625214517
+                                                ">Marjorie P Hart</a></td>
+                                            <td>1:00 p.m.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button class="fondo-Boton" v-if="usuarioActual != null" onclick='app.mostrarConClick("foro",2)'>Chat-foro-U2</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                     U3
+                    </button>
+                        </h2>
+                        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body contenido-Acordion">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Day</th>
+                                            <th scope="col">Location</th>
+                                            <th scope="col">Times</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>9/01</td>
+                                            <td><a href="https://www.google.com/maps/place/Green+Bay,+Wisconsin,+EE.+UU./@44.522945,-87.990495,11z/data=!4m5!3m4!1s0x8802e2e809b380f3:0x6370045214dcf571!8m2!3d44.5133188!4d-88.0132958?hl=es">Greenbay</a></td>
+                                            <td>1:00 p.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9/15</td>
+                                            <td><a href="https://www.google.com/maps/place/AJ+Katzenmaier+Elementary/@41.900229,-87.629069,16z/data=!4m5!3m4!1s0x0:0x15e198c063fc787c!8m2!3d41.9002288!4d-87.6290694?hl=es">AJ Katzenmaier</a></td>
+                                            <td>1:00 p.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9/22</td>
+                                            <td><a href="https://www.google.com/maps/place/SOUTH+ELEMENTARY+SCHOOL/@42.020217,-87.886045,7z/data=!4m5!3m4!1s0x0:0x93bdf85af2a839ed!8m2!3d42.0202171!4d-87.8860448?hl=es">South</a></td>
+                                            <td>9:30 a.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10/08</td>
+                                            <td><a href="https://www.google.com/maps/place/Howard+A+Yeager+Elementary/@41.923261,-87.662921,16z/data=!4m5!3m4!1s0x0:0xb6cb22b2f0358874!8m2!3d41.923261!4d-87.6629215?hl=es">Howard A Yeager</a></td>
+                                            <td>9:30 a.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10/20</td>
+                                            <td><a href="https://www.google.com/maps/place/North+Elementary/@41.907145,-87.646123,16z/data=!4m5!3m4!1s0x0:0x5736e62f19086c62!8m2!3d41.9071449!4d-87.6461229?hl=es">North</a></td>
+                                            <td>9:30 a.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10/27</td>
+                                            <td><a href="https://www.google.com/maps/place/AJ+Katzenmaier+Elementary/@41.900229,-87.629069,16z/data=!4m5!3m4!1s0x0:0x15e198c063fc787c!8m2!3d41.9002288!4d-87.6290694?hl=es">AJ Katzenmaier</a></td>
+                                            <td>9:30 a.m.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button class="fondo-Boton" v-if="usuarioActual != null" onclick='app.mostrarConClick("foro",3)'>Chat-foro-U3</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                      U4
+                    </button>
+                        </h2>
+                        <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body contenido-Acordion">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Day</th>
+                                            <th scope="col">Location</th>
+                                            <th scope="col">Times</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>9/01</td>
+                                            <td><a href="https://www.google.com/maps/place/AJ+Katzenmaier+Elementary/@41.900229,-87.629069,16z/data=!4m5!3m4!1s0x0:0x15e198c063fc787c!8m2!3d41.9002288!4d-87.6290694?hl=es">AJ Katzenmaier</a></td>
+                                            <td>9:30 a.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9/15</td>
+                                            <td><a href="https://www.google.com/maps/place/North+Elementary/@41.907145,-87.646123,16z/data=!4m5!3m4!1s0x0:0x5736e62f19086c62!8m2!3d41.9071449!4d-87.6461229?hl=es">North</a></td>
+                                            <td>9:30 a.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9/29</td>
+                                            <td><a href="https://www.google.com/maps/place/Green+Bay,+Wisconsin,+EE.+UU./@44.522945,-87.990495,11z/data=!4m5!3m4!1s0x8802e2e809b380f3:0x6370045214dcf571!8m2!3d44.5133188!4d-88.0132958?hl=es">Greenbay</a></td>
+                                            <td>9:30 a.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10/08</td>
+                                            <td><a href="https://www.google.com/maps/place/Howard+A+Yeager+Elementary/@41.923261,-87.662921,16z/data=!4m5!3m4!1s0x0:0xb6cb22b2f0358874!8m2!3d41.923261!4d-87.6629215?hl=es">Howard A Yeager</a></td>
+                                            <td>9:30 a.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10/20</td>
+                                            <td><a href="https://www.google.com/maps?ll=41.929623,-87.645973&z=16&t=m&hl=es&gl=AR&mapclient=embed&cid=15852491871625214517
+                                                ">Marjorie P Hart</a></td>
+                                            <td>1:00 p.m.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button class="fondo-Boton" v-if="usuarioActual != null" onclick='app.mostrarConClick("foro",4)'>Chat-foro-U4</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingFive">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                      U5
+                    </button>
+                        </h2>
+                        <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body contenido-Acordion">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Day</th>
+                                            <th scope="col">Location</th>
+                                            <th scope="col">Times</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>9/08</td>
+                                            <td><a href="https://www.google.com/maps/place/Howard+A+Yeager+Elementary/@41.923261,-87.662921,16z/data=!4m5!3m4!1s0x0:0xb6cb22b2f0358874!8m2!3d41.923261!4d-87.6629215?hl=es">Howard A Yeager</a></td>
+                                            <td>9:30 a.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9/15</td>
+                                            <td><a href="https://www.google.com/maps/place/AJ+Katzenmaier+Elementary/@41.900229,-87.629069,16z/data=!4m5!3m4!1s0x0:0x15e198c063fc787c!8m2!3d41.9002288!4d-87.6290694?hl=es">AJ Katzenmaier</a></td>
+                                            <td>1:00 p.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9/27</td>
+                                            <td><a href="https://www.google.com/maps/place/Green+Bay,+Wisconsin,+EE.+UU./@44.522945,-87.990495,11z/data=!4m5!3m4!1s0x8802e2e809b380f3:0x6370045214dcf571!8m2!3d44.5133188!4d-88.0132958?hl=es">Greenbay</a></td>
+                                            <td>9:30 a.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10/06</td>
+                                            <td><a href="https://www.google.com/maps?ll=41.929623,-87.645973&z=16&t=m&hl=es&gl=AR&mapclient=embed&cid=15852491871625214517
+                                                ">Marjorie P Hart</a></td>
+                                            <td>9:30 a.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10/08</td>
+                                            <td><a href="https://www.google.com/maps/place/Green+Bay,+Wisconsin,+EE.+UU./@44.522945,-87.990495,11z/data=!4m5!3m4!1s0x8802e2e809b380f3:0x6370045214dcf571!8m2!3d44.5133188!4d-88.0132958?hl=es">Greenbay</a></td>
+                                            <td>1:00 p.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10/27</td>
+                                            <td><a href="https://www.google.com/maps/place/Howard+A+Yeager+Elementary/@41.923261,-87.662921,16z/data=!4m5!3m4!1s0x0:0xb6cb22b2f0358874!8m2!3d41.923261!4d-87.6629215?hl=es">Howard A Yeager</a></td>
+                                            <td>1:00 p.m.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button class="fondo-Boton" v-if="usuarioActual != null" onclick='app.mostrarConClick("foro",5)'>Chat-foro-U5</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingSix">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+                      U6
+                    </button>
+                        </h2>
+                        <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body contenido-Acordion">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Day</th>
+                                            <th scope="col">Location</th>
+                                            <th scope="col">Times</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>9/08</td>
+                                            <td><a href="https://www.google.com/maps/place/Howard+A+Yeager+Elementary/@41.923261,-87.662921,16z/data=!4m5!3m4!1s0x0:0xb6cb22b2f0358874!8m2!3d41.923261!4d-87.6629215?hl=es">Howard A Yeager</a></td>
+                                            <td>9:30 a.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9/22</td>
+                                            <td><a href="https://www.google.com/maps/place/Howard+A+Yeager+Elementary/@41.923261,-87.662921,16z/data=!4m5!3m4!1s0x0:0xb6cb22b2f0358874!8m2!3d41.923261!4d-87.6629215?hl=es">Howard A Yeager</a></td>
+                                            <td>1:00 p.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10/06</td>
+                                            <td><a href="https://www.google.com/maps/place/SOUTH+ELEMENTARY+SCHOOL/@42.020217,-87.886045,7z/data=!4m5!3m4!1s0x0:0x93bdf85af2a839ed!8m2!3d42.0202171!4d-87.8860448?hl=es">South</a></td>
+                                            <td>1:00 p.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10/20</td>
+                                            <td><a href="https://www.google.com/maps/place/North+Elementary/@41.907145,-87.646123,16z/data=!4m5!3m4!1s0x0:0x5736e62f19086c62!8m2!3d41.9071449!4d-87.6461229?hl=es">North</a></td>
+                                            <td>9:30 a.m.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10/27</td>
+                                            <td><a href="https://www.google.com/maps/place/Howard+A+Yeager+Elementary/@41.923261,-87.662921,16z/data=!4m5!3m4!1s0x0:0xb6cb22b2f0358874!8m2!3d41.923261!4d-87.6629215?hl=es">Howard A Yeager</a></td>
+                                            <td>1:00 p.m.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button class="fondo-Boton" v-if="usuarioActual != null" onclick='mostrarConClick("foro",6)'>Chat-foro-U6</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="notices">
+                <h1 class="col-12">Notices</h1>
+                <ul class="row">
+                    <li class="col-6">
+                        <p>There is a temporary notice on GreenBay. if this is the case, the matches on 01/9 will be canceled until further notice</p>
+                        <ol class="row">
+                            <li class="col-12">
+                                <p> U3 and U4 category matches could be played next week, we need parental confirmation</p>
+                            </li>
+                        </ol>
+                    </li>
+                    <li class="col-6">
+                        <p>The categories that play matches on 9/29 have the day off.</p>
+                        <ol class="row">
+                            <li class="col-12">
+                                <p>Since there are no games in the league that day, we would like you to support the games in the other categories.</p>
+                            </li>
+                            <li class="col-12">
+                                <p>They can also go to the league complex, as there will be some events that your children can participate in.</p>
+                            </li>
+                        </ol>
+                    </li>
+                </ul>
+                <div class="col-6">
+                    <div class="collapse multi-collapse" id="multiCollapseExample2">
+                        <div class="card card-body">
+                            9/15 U2 and U4 Location North Times 9:30 a.m.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="contact">
+                <h1 class="col-12">Contact with NYSL</h1>
+                <div class="col-12">
+                    <p>Please email us at <a class="border border-success" href="mailto:nysl@chisoccer.org?subject=Reaching%20Out&body=How%20are%20you">nysl@chisoccer.org</a></p>
+                    <p>We will reply to your email as soon as we can</p>
+                </div>
+            </div>
+            <div id="foro" class="row foro">
+                <h1 class="col-12">Forum</h1>
+                <div class="mb-3">
+                    <div class="col-12">
+                        <button class="fondo-Boton" v-if="usuarioActual != null" onclick='app.mostrarConClick("foro",1)'>Chat-foro-U1</button>
+                        <button class="fondo-Boton" v-if="usuarioActual != null" onclick='app.mostrarConClick("foro",2)'>Chat-foro-U2</button>
+                        <button class="fondo-Boton" v-if="usuarioActual != null" onclick='app.mostrarConClick("foro",3)'>Chat-foro-U3</button>
+                        <button class="fondo-Boton" v-if="usuarioActual != null" onclick='app.mostrarConClick("foro",4)'>Chat-foro-U4</button>
+                        <button class="fondo-Boton" v-if="usuarioActual != null" onclick='app.mostrarConClick("foro",5)'>Chat-foro-U5</button>
+                        <button class="fondo-Boton" v-if="usuarioActual != null" onclick='app.mostrarConClick("foro",6)'>Chat-foro-U6</button>
+                    </div>
+                    <label for="exampleFormControlTextarea1" class="form-label">All Messages</label>
+                    <textarea class="form-control" v-model:value="mensaje" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <button v-on:click="crearMensaje" type="button" class="btn btn-success">Send</button>
+                </div>
+                <div class="mb-3 fondo-Foro" v-for="foro in foros">
+                    <h3>{{foro.usuario}}</h3>
+                    <p>{{foro.mensaje}}</p>
+                </div>
+            </div>
         </main>
     </div>
     <footer class="pie fixed-bottom">
-        <nav class="navbar navbar-light colorNav">
-            <div class="container-fluid">
+        <nav class="navbar navbar-light color-Nav">
+            <div class="container-fluid ">
                 <span class="navbar-text col-12">
                     Nsyl league. all rights reserved 2021
               </span>
@@ -102,16 +519,18 @@
         </nav>
     </footer>
 
+
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="/__/firebase/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="/__/firebase/8.2.9/firebase-analytics.js"></script>
-
-    <!-- Initialize Firebase -->
-    <script src="/__/firebase/init.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-database.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 

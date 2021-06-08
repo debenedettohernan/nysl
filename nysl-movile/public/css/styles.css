@@ -1,44 +1,89 @@
-#img {
-    width: 45px;
-    height: 34px;
-}
-
-.colorNav {
-    background-color: rgba(32, 202, 83, 0.966);
-}
-
-div h1 {
-    text-align: center;
-    margin-right: 20px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-li a {
-    text-align: left;
-}
-
-body {
-    background-image: url(../img/fondo.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-}
-
-.pie {
-    width: 100%;
-}
-
-footer nav div span {
-    text-align: center;
-    font-size: 18px;
-}
-
-.contenidoInfo {
-    background-color: rgb(250, 234, 234);
-}
-
-.contenidoAcordion {
-    background-color: rgb(44, 248, 105);
-    border-right-color: rgb(28, 92, 47);
-}
+            #img {
+                width: 45px;
+                height: 34px;
+            }
+            
+            .color-Nav {
+                background-color: rgba(32, 202, 83, 0.966);
+            }
+            
+            div h1 {
+                text-align: center;
+                margin-right: 20px;
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+            
+            li a {
+                text-align: center;
+            }
+            
+            body {
+                background-image: url(../img/fondo.png);
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-attachment: scroll;
+            }
+            
+            .pie {
+                width: 100%;
+            }
+            
+            footer nav div span {
+                text-align: center;
+                font-size: 18px;
+            }
+            
+            .contenido-Info {
+                background-color: rgb(250, 234, 234);
+            }
+            
+            .contenido-Acordion {
+                background-color: rgb(44, 248, 105);
+                border-right-color: rgb(28, 92, 47);
+            }
+            
+            .fondo-Boton {
+                background-color: aquamarine;
+            }
+            
+            .fondo-Foro {
+                background-color: burlywood;
+                padding-bottom: 20px;
+            }
+            
+            @media (max-width: 700px) and (orientation: landscape) {
+                body {
+                    background-image: url(../img/fondo2.png);
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-attachment: scroll;
+                }
+                .color-Nav {
+                    background-color: rgba(81, 240, 81, 0.966);
+                }
+                footer {
+                    display: none;
+                }
+                .contenido-Acordion {
+                    background-color: rgb(32, 197, 82);
+                    border-right-color: rgb(28, 92, 78);
+                }
+                p {
+                    text-decoration-style: solid;
+                    color: rgb(100, 26, 26);
+                }
+                p a {
+                    color: rgb(235, 12, 41);
+                    text-decoration: solid;
+                }
+                td a {
+                    color: rgb(12, 85, 12)
+                }
+                .fondo-Boton {
+                    background-color: rgb(0, 230, 50);
+                }
+                .fondo-Foro {
+                    background-color: rgb(135, 222, 215);
+                }
+            }
